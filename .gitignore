@@ -1,0 +1,3 @@
+#ignore target dirs for both client and server
+server/target
+client/target
