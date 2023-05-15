@@ -24,7 +24,7 @@
 		<link>
 			<name>src/main/java/com/protose/shared</name>
 			<type>2</type>
-			<location>C:/Users/Martin/Documents/Master Thesis/ProjectHierarchyTest/shared</location>
+			<location>$%7BPARENT-1-PROJECT_LOC%7D/shared</location>
 		</link>
 	</linkedResources>
 	<filteredResources>
