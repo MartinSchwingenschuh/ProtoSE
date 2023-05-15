@@ -2,12 +2,24 @@
 client/target
 
 client/Client/srv/*
+!client/Client/srv/.gitkeep
+
 client/Client/tmp/*
+!client/Client/tmp/.gitkeep
+
 client/Client/keys/*
+!client/Client/keys/.gitkeep
+
 client/Client/logs/*
+!client/Client/logs/.gitkeep
 
 #server ignore files
 server/target
 
 server/Server/logs/*
+!server/Server/logs/.gitkeep
+
 server/Server/srv/*
+!server/Server/srv/.gitkeep
+
+!server/Server/etc/.gitkeep
