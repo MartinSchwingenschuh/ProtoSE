@@ -153,7 +153,7 @@ public class GUI {
             }
         });
 
-        ImageIcon logo = new ImageIcon("./Client/resources/logo.png");
+        ImageIcon logo = new ImageIcon("./resources/logo.png");
         frame.setIconImage(logo.getImage());
 
         /***************************************************************************
@@ -230,7 +230,7 @@ public class GUI {
                         // }catch(Exception ex){
                             
                         // }
-                        File outputFile = new File("./Client/tmp/tmp.pdf");
+                        File outputFile = new File("./tmp/tmp.pdf");
                         try (FileOutputStream outputStream = new FileOutputStream(outputFile)) {
                             outputStream.write(fs.toByteArray());
                         }catch(Exception ex){
@@ -294,7 +294,7 @@ public class GUI {
                         controller.openDocument(doc, 0, doc.length, fileList.getSelectedValue(), null);
                         controller.setToolBarVisible(false);
                         controller.setUtilityPaneVisible(false);
-                        controller.openDocument("./Client/tmp/tmp.pdf"); 
+                        controller.openDocument("./tmp/tmp.pdf"); 
                         frame.pack();
                     }
                    
@@ -318,7 +318,7 @@ public class GUI {
                             try {
                                 //get document and store as file in tmp directory
                                 ByteArrayOutputStream fs = client.searchDocument(fileList.getSelectedValue());
-                                File tmpFile = new File("./Client/tmp/docs/" + fileList.getSelectedValue());
+                                File tmpFile = new File("./tmp/docs/" + fileList.getSelectedValue());
                                 try (FileOutputStream outputStream = new FileOutputStream(tmpFile)) {
                                     outputStream.write(fs.toByteArray());
                                 }catch(Exception ex){
@@ -399,7 +399,7 @@ public class GUI {
                         controller.openDocument(selection.getPDFinMem(), 0, selection.getPDFinMem().length, selection.getDocName(), null);
                         controller.setToolBarVisible(false);
                         controller.setUtilityPaneVisible(false);
-                        controller.openDocument("./Client/tmp/tmp.pdf"); 
+                        controller.openDocument("./tmp/tmp.pdf"); 
                         frame.pack();
                     }
                 }
@@ -418,7 +418,7 @@ public class GUI {
                             DP selection = partList.getSelectedValue();
                             try {
                                 //get document and store as file in tmp directory
-                                File tmpFile = new File("./Client/tmp/docs/" + "part-" + selection.getDocName());
+                                File tmpFile = new File("./tmp/docs/" + "part-" + selection.getDocName());
                                 try (FileOutputStream outputStream = new FileOutputStream(tmpFile)) {
                                     outputStream.write(selection.getPDFinMem());
                                 }catch(Exception ex){
@@ -649,7 +649,7 @@ public class GUI {
             
 
             //TODO: change icon to svg variant
-            ImageIcon pdfIcon = new ImageIcon("./Client/resources/PDFIcon.png");
+            ImageIcon pdfIcon = new ImageIcon("./resources/PDFIcon.png");
             Image image = pdfIcon.getImage(); // transform it 
             Image scaledImage = image.getScaledInstance(20, 24,  java.awt.Image.SCALE_SMOOTH); // scale it the smooth way  
             pdfIcon = new ImageIcon(scaledImage);  // transform it back
