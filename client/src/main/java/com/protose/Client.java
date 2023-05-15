@@ -24,6 +24,7 @@ import java.util.logging.FileHandler;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.logging.SimpleFormatter;
+import java.util.stream.Collectors;
 
 import javax.crypto.SealedObject;
 
@@ -676,11 +677,9 @@ public class Client {
 
         //filter result set for search word to get the true result set
         //TODO: think of better (faster) filtering maybe with the path data
-        DPSet = new LinkedList<>(
-            DPSet.stream().filter(dp -> {
+        DPSet = DPSet.stream().filter(dp -> {
                 return dp.getWords().contains(searchWord);
-            }).toList()
-        );
+            }).collect(Collectors.toList());
 
         //add the local document parts
         for (PathNode node : storePath.getPath()) {

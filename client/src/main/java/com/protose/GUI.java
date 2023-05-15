@@ -119,12 +119,16 @@ public class GUI {
         partModel = new DefaultListModel<>();
 
         //look and feel options
-        try {
-            // UIManager.setLookAndFeel("javax.swing.plaf.metal.MetalLookAndFeel");
-            UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
-        } catch (Exception e) {
-            e.printStackTrace();
+        String os = System.getProperty("os.name");
+        if(os.contains("Windows")){
+            try {
+                // UIManager.setLookAndFeel("javax.swing.plaf.metal.MetalLookAndFeel");
+                UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
+        
 
         /***************************************************************************
          * TOP LAYER FRAME

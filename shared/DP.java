@@ -63,7 +63,7 @@ public class DP implements Serializable{
      */
     public static DP createDecoy(){
         SecureRandom randGen = new SecureRandom();
-        byte[] randomData = new byte[randGen.nextInt(1000,10000)];
+        byte[] randomData = new byte[1000 + randGen.nextInt(10000)];
         randGen.nextBytes(randomData);
         return new DP(randomData, "decoyProtoSE.sys", 0);//TODO: options
     }
