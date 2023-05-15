@@ -1,0 +1,24 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Client",
+            "request": "launch",
+            "mainClass": "com.protose.Client",
+            "projectName": "client",
+            "cwd": "${workspaceFolder}/client/Client"
+        },
+        {
+            "type": "java",
+            "name": "Server",
+            "request": "launch",
+            "mainClass": "com.protose.Server",
+            "projectName": "server",
+            "cwd": "${workspaceFolder}/server/Server"
+        }
+    ]
+}

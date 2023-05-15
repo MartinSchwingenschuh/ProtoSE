@@ -1,3 +1,13 @@
-#ignore target dirs for both client and server
-server/target
+#client ignore fiels
 client/target
+
+client/Client/srv/*
+client/Client/tmp/*
+client/Client/keys/*
+client/Client/logs/*
+
+#server ignore files
+server/target
+
+server/Server/logs/*
+server/Server/srv/*

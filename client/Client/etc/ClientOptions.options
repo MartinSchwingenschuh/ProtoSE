@@ -1,0 +1,38 @@
+# the address of the server
+SERVER_HOST 127.0.0.1
+
+# the port where the server hosts the RMI registry
+SERVER_PORT 5000
+
+# the name of the specific RMI registry entry, this needs to be the same at server and client
+RMI_REGISTRY_NAME ProtoSE:ServerStub
+
+# the location where the client stores data locally
+LOCAL_STORAGE_PATH ./
+
+#name of the document database
+CLIENT_D_NAME D_document_index
+
+#path to the directory where the document database should be stored
+CLIENT_D_PATH ./srv
+
+#path to the system log file, the file will be created if missing
+CLIENT_LOG_FILE ./logs/protoSE.log
+
+#directory where temporary files should be stored
+CLIENT_TMP_DIR ./tmp
+
+#directory where the keys and keystore should be stored
+CLIENT_KEYS_DIR ./keys
+
+#defines the distance used by the path generator to hide the first and last node
+CLIENT_PATHGEN_HIDEDISTANCE 10
+
+#defines the number of document parts which can be stored in the buffer
+CLIENT_SCRAMBLEBUFFER_SIZE 10
+
+#defines the number of decoys in percent
+CLIENT_SCRAMBLEBUFFER_NULLFACTOR 20
+
+#number of queries that can be stored in the query cash
+CLIENT_QUERYCASH_SIZE

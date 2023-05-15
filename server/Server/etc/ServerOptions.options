@@ -1,0 +1,34 @@
+# the address of the server
+SERVER_HOST 127.0.0.1
+
+# the port where the server hosts the RMI registry
+SERVER_PORT 5000
+
+# the name of the specific RMI registry entry, this needs to be the same at server and client
+RMI_REGISTRY_NAME ProtoSE:ServerStub
+
+#the name of the database used for the edp storage
+SERVER_S_NAME
+
+#the path used for the edp storage
+SERVER_S_PATH
+
+#the name of the database used for the word index
+SERVER_I_NAME
+
+#the path used for the word index database
+SERVER_I_PATH
+
+#name of the system log file
+SERVER_LOG_NAME
+
+#location where to store the system log file
+SERVER_LOG_PATH
+
+#horizontal dimension of the search structure
+SERVER_WIDTH 100
+
+#vertical dimension of the search structure
+SERVER_DEPTH 100
+
+SERVER_TMP_DIR ./tmp

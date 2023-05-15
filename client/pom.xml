@@ -17,14 +17,40 @@
     <maven.compiler.target>1.8</maven.compiler.target>
   </properties>
 
-  <!-- <dependencies>
-    <dependency>
+  <dependencies>
+  <!-- dependency if auto test function of maven is needed -->
+    <!-- <dependency>
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>
       <version>4.11</version>
       <scope>test</scope>
+    </dependency> -->
+    <!-- database rocks db -->
+    <dependency>
+  		<groupId>org.rocksdb</groupId>
+  		<artifactId>rocksdbjni</artifactId>
+  		<version>5.5.1</version>
+  	</dependency>
+    <!-- used for serialization utils -->
+    <dependency>
+      <groupId>org.apache.commons</groupId>
+      <artifactId>commons-lang3</artifactId>
+      <version>3.12.0</version>
     </dependency>
-  </dependencies> -->
+    <!-- utilities for working with pdfs -->
+    <dependency>
+      <groupId>org.apache.pdfbox</groupId>
+      <artifactId>pdfbox</artifactId>
+      <version>2.0.27</version>
+    </dependency>
+    <!-- Contains the bidirectional hash map -->
+    <dependency>
+        <groupId>com.google.guava</groupId>
+        <artifactId>guava</artifactId>
+        <version>31.0.1-jre</version>
+    </dependency>
+
+  </dependencies>
 
   <build>
     <pluginManagement><!-- lock down plugins versions to avoid using Maven defaults (may be moved to parent pom) -->
