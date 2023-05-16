@@ -3,23 +3,15 @@ package com.protose;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
-import java.io.IOException;
-import java.io.OutputStream;
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
-
-import javax.crypto.SealedObject;
 
 import org.apache.pdfbox.multipdf.PDFMergerUtility;
 import org.apache.pdfbox.multipdf.Splitter;
 import org.apache.pdfbox.pdmodel.PDDocument;
 
-import com.protose.shared.Crypto;
 import com.protose.shared.DP;
-import com.protose.shared.OptionsManager;
 
 /**
  * Document splitter

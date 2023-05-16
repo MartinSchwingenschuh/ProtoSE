@@ -1,16 +1,12 @@
 package com.protose;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Map;
 import java.util.Random;
 
-import com.protose.shared.IRemoteServer;
 import com.protose.shared.DP;
-import com.protose.shared.OptionsManager;
 
 public class ScrambleBuffer implements Serializable{
     
@@ -81,7 +77,7 @@ public class ScrambleBuffer implements Serializable{
     }
 
     /**
-     * //TODO: rename this function
+     * 
      * @return
      */
     public List<DP> get(){
@@ -127,6 +123,16 @@ public class ScrambleBuffer implements Serializable{
                 buffer[i] = DP.createDecoy();
             }
         }
+    }
+
+    /**
+     * 
+     */
+    public void clear(){
+        for (int i = buffer.length - 1; i >= 0; i--) {
+            buffer[i] = null;
+        }
+        top = 0;
     }
 
     /**

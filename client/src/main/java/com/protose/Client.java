@@ -298,7 +298,6 @@ public class Client {
                     try {
                         ep = serverStub.getPath(crypto.hmac(wm));
                     } catch (RemoteException e) {
-                        // TODO Auto-generated catch block
                         e.printStackTrace();
                     }
                     if(ep != null){
@@ -391,10 +390,9 @@ public class Client {
                             }
                         }
                         
+                        //error case there is no path found in system
                         if(p == null){
-                            //error case there is no store path in the system
-                            //TODO: error handling
-                            System.out.println("[ERROR] p is null");
+                            logger.log(Level.SEVERE, "no path found for fixup");
                             return;
                         }
                         
@@ -440,7 +438,7 @@ public class Client {
 
         //error handling
         if(p == null){
-            //TODO: error handling
+            logger.log(Level.SEVERE, "no document path found");
             return;
         }
 
@@ -494,7 +492,7 @@ public class Client {
                 QueryPath query = pathGenerator.generateQuery(tmp, searchStructureHead);
 
                 //query server
-                List<DP> dps = new LinkedList<DP>();//TODO: check if this is always one element big
+                List<DP> dps = new LinkedList<DP>();
                 try {
                     Set<SealedObject> edps = serverStub.access(query);
                     
@@ -582,9 +580,6 @@ public class Client {
             //filter for true result set
             List<DP> tmp = new LinkedList<DP>();
             for (DP dp : DPs) {
-                // if(!dp.getDocName().equals(docname)){
-                //     DPs.remove(dp);
-                // }
                 if(dp.getDocName().equals(docname)) tmp.add(dp);
             }
             DPs = tmp;
@@ -672,7 +667,7 @@ public class Client {
                 DPSet.add(crypto.decryptEDP(sealedObject));
             }
         } catch (Exception e) {
-            // TODO: handle exception
+            e.printStackTrace();
         }        
 
         //filter result set for search word to get the true result set
@@ -689,8 +684,6 @@ public class Client {
         //empty cash
         emptyQueryCash();
 
-        //if DP set is null -> nothing found in system return a
-        //list with 0 elements but not null
         return DPSet;
     }
 
@@ -748,7 +741,7 @@ public class Client {
             //reset word map -> no mapping at this point
             wordMap.clear();
             
-            //temporarly save the elements which should be kept
+            //temporarily save the elements which should be kept
             //calculate the number of elements kept in query cash
             //TODO: make option for this number
             int keep = ((queryCash.size() - 10) % 2 == 0) ? (10) : (11);
@@ -805,43 +798,30 @@ public class Client {
         }
     }
 
-    public static void main(String[] args) throws Exception {
-       
-        Client client = new Client();      
 
-        // //store doc on server
-        // File testFile = new File("document.pdf");
-        // // client.addDocument(testFile);
-        // File testFile2 = new File("TestFileOne.pdf");
-        // client.addDocument(testFile2);
-        // File testFile3 = new File("TestFileTwo.pdf");
-        // client.addDocument(testFile3);
-        
-        // //search for one word
-        // List<DP> retVal = client.searchWord("server");
-        // List<DP> retVal2 = client.searchWord("testFileOne");
-        // List<DP> retVal3 = client.searchWord("testFileTwo");
-        // List<DP> retVal4 = client.searchWord("Hello");
+    /**
+     * resets the system and deletes all the stored data
+     */
+    public void purge(){
 
-        // //get doc back
-        // ByteArrayOutputStream test = client.searchDocument("TestFileOne.pdf");
+        //delete the databases
+        D.clear();
 
-        // // File retFile = new File("retfile.pdf");
-        // try(OutputStream outputStream = new FileOutputStream("retfile.pdf")) {
-        //     test.writeTo(outputStream);
-        //     outputStream.close();
-        // }
+        //reset the in memory objects
+        wordMap.clear();
+        freeList.clear();
+        scrambleBuffer.clear();
+        queryCash.clear();
 
-        // //delete document
-        // client.deleteDocument(testFile3);
-
-        // List<DP> retValDel1 = client.searchWord("testFileTwo");
-
-        // //shut down the client
-        // client.shutDown();
-
-        System.out.println("EOP");
-
+        //send purge to server
+        try {
+            serverStub.purge();
+        } catch (RemoteException e) {
+            e.printStackTrace();
+        }
     }
 
+    public static void main(String[] args) throws Exception {
+        Client client = new Client(); 
+    }
 }

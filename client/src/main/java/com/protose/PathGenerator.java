@@ -3,7 +3,6 @@ package com.protose;
 import java.util.List;
 
 import com.protose.shared.Crypto;
-import com.protose.shared.PathAction;
 import com.protose.shared.QueryPath;
 import com.protose.shared.StorePath;
 import com.protose.shared.StorePath.PathNode;
@@ -14,7 +13,6 @@ public class PathGenerator {
     private int hideDistance;
     private int serverWidth;
 
-    //TODO: what do i need here?
     public PathGenerator(Crypto crypto, int hideDistance, int serverWidth){
         this.crypto = crypto;
         this.hideDistance = hideDistance;
@@ -40,9 +38,6 @@ public class PathGenerator {
         crypto.shuffleList(p);
 
         //hide first and last node by adding fake nodes
-        // int real0 = p.get(0).serverPos;
-        // int realn = p.get(p.size()).serverPos;
-
         PathNode n0 = storePath.new PathNode();
         n0.serverPos = crypto.getRandomInt(serverHead);//TODO: implement custom distance
         n0.isInternal = false;
@@ -56,7 +51,6 @@ public class PathGenerator {
         // //expand the path between the nodes
         qp.startPos = p.get(0).serverPos;
 
-        // qp.positions.add(qp.startPos);
         //TODO: this is just the access pattern which needs to be 
         //hidden
         for (PathNode pathNode : p) {

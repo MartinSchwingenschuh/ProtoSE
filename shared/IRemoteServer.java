@@ -6,9 +6,6 @@ import java.util.Set;
 
 import javax.crypto.SealedObject;
 
-import com.protose.shared.QueryPath;
-
-
 public interface IRemoteServer extends Remote{
     
     /**
@@ -47,7 +44,7 @@ public interface IRemoteServer extends Remote{
 
 
     /**
-     * TODO: what needs to happen when reducing
+     * 
      * @throws RemoteException
      */
     public void reduce() throws RemoteException;
@@ -66,4 +63,10 @@ public interface IRemoteServer extends Remote{
      */
     public int getSearchStructureWidth() throws RemoteException;
 
+
+    /**
+     * 
+     * @throws RemoteException
+     */
+    public void purge() throws RemoteException;
 }

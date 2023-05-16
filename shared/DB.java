@@ -8,7 +8,6 @@ import java.nio.file.Files;
 import java.util.LinkedList;
 import java.util.List;
 
-import org.apache.commons.lang3.NotImplementedException;
 import org.apache.commons.lang3.SerializationUtils;
 import org.rocksdb.Options;
 import org.rocksdb.RocksDB;
@@ -121,4 +120,16 @@ public class DB<K extends Serializable,V extends Serializable>{
 
         return retVal;
     }
+
+    public void clear(){
+        List<byte[]> allKeys = getAllKeys();
+        for (byte[] bs : allKeys) {
+            try {
+                db.delete(bs);
+            } catch (RocksDBException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
 }

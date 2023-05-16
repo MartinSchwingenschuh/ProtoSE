@@ -112,7 +112,7 @@ public class Server extends UnicastRemoteObject implements IRemoteServer{
 
         for (Integer pos : p.positions) {
             int posW = pos%width;
-            int posD = pos/width;//TODO: check this
+            int posD = pos/width;
             int ident = P[posW][posD];
 
             SealedObject edp = S.find(ident);
@@ -130,7 +130,6 @@ public class Server extends UnicastRemoteObject implements IRemoteServer{
         if(position > head){
             System.out.println("[ERROR]");
             logger.log(Level.SEVERE, "storeEDP position is larger than head");
-            //TODO: think of a proper error handling
         }
         
         int ident = edp.hashCode();
@@ -158,7 +157,6 @@ public class Server extends UnicastRemoteObject implements IRemoteServer{
     @Override
 	public SealedObject getPath(byte[] hash) throws RemoteException {
         SealedObject path = I.find(hash);
-        if(path == null) System.out.println("requested path not found"); //TODO:delete this
         I.delete(hash);
         logger.log(Level.INFO, "path accessed and deleted: " + hash);
         return path;
@@ -219,14 +217,17 @@ public class Server extends UnicastRemoteObject implements IRemoteServer{
         System.out.println("INFO: server shut down");
     }
 
+    @Override
+    public void purge() throws RemoteException {
+        P = new int[width][depth];
+        head = 0;
+        I.clear();
+        S.clear();
+    }
+
     public static void main(String[] args) { 
         try {
             Server server = new Server();
-            
-            //TODO: rmi service runns concurrently
-            // we need to control shutdown here
-
-
         } catch (RemoteException e) {
             e.printStackTrace();
         }

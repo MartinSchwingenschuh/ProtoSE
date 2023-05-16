@@ -61,7 +61,7 @@ public class StorePath implements Serializable{
     }
 
     /**
-     * TODO: use factory?
+     * 
      * @return
      */
     public static PathNode getNewNode(){

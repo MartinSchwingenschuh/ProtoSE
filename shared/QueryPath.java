@@ -16,7 +16,6 @@ public class QueryPath implements Serializable{
         positions = new ArrayList<Integer>();
     }
     
-    //TODO: is this really necessary?
     //could be done with direct access
     public void addAction(PathAction action){
         this.actions.add(action);
