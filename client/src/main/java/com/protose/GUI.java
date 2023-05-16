@@ -144,7 +144,7 @@ public class GUI {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         // frame.setSize(windowSize);
 
-        frame.setExtendedState(JFrame.MAXIMIZED_BOTH); 
+        // frame.setExtendedState(JFrame.MAXIMIZED_BOTH); 
         // frame.setUndecorated(true);
 
         frame.addWindowListener(new WindowAdapter() {
@@ -153,8 +153,15 @@ public class GUI {
             }
         });
 
-        ImageIcon logo = new ImageIcon("./resources/logo.png");
+        //set size to half the screen size
+        frame.setSize(new Dimension((int)windowSize.getWidth()/2, (int)windowSize.getHeight()/2));
+
+        //set logo
+        ImageIcon logo = new ImageIcon("./resources/Logo.png");
         frame.setIconImage(logo.getImage());
+
+        frame.setMaximumSize(screenSize);
+        
 
         /***************************************************************************
          * TOP LAYER PANELS
