@@ -100,7 +100,8 @@ public class GUI {
             @Override
             public void actionPerformed(ActionEvent e) {
                 client.purge();
-                documentModel.removeElement(fileList.getSelectedValue());
+                // documentModel.removeElement(fileList.getSelectedValue());
+                documentModel.clear();
             }
         });
         fileMenu.add(deleteAllMenu);
