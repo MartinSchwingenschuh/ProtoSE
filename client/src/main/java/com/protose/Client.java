@@ -189,7 +189,7 @@ public class Client {
         //init PathGenerator
         pathGenerator = new PathGenerator(
             this.crypto,
-            Integer.parseInt(optionsManager.getOption(OPTIONIDENT.CLIENT_PATHGEN_HIDEDISTANCE)),
+            optionsManager,
             searchStructureWidth
         );
 

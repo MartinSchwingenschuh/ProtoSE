@@ -25,8 +25,20 @@ CLIENT_TMP_DIR ./tmp
 #directory where the keys and keystore should be stored
 CLIENT_KEYS_DIR ./keys
 
-#defines the distance used by the path generator to hide the first and last node
+# activate/deactivate the hiding of the first and last node
+CLIENT_PATHGEN_FLHIDING true
+
+# defines the distance used by the path generator to hide the first and last node
+# if the defined distance is greater than the current head
+# the current head is used for generating paths
 CLIENT_PATHGEN_HIDEDISTANCE 10
+
+# defines the mode how the query path is generated
+# RANDACC is a random access mode where a number of random 
+# nodes are queried additional to the queried ones
+# PATHACC is a path mode where a path is generated and permuted
+CLIENT_PATHGEN_MODE RANDACC
+# CLIENT_PATHGEN_MODE PATHACC
 
 #defines the number of document parts which can be stored in the buffer
 CLIENT_SCRAMBLEBUFFER_SIZE 10

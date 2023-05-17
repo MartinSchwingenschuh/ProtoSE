@@ -27,9 +27,11 @@ public class GUI {
 
     //the model for the document view
     private DefaultListModel<String> documentModel;
+    private JList<String> fileList;
 
     //the model for the document part view
     private DefaultListModel<DP> partModel;
+    private JList<DP> partList;
 
     //for pdf viewer
     private SwingController controller;
@@ -98,6 +100,7 @@ public class GUI {
             @Override
             public void actionPerformed(ActionEvent e) {
                 client.purge();
+                documentModel.removeElement(fileList.getSelectedValue());
             }
         });
         fileMenu.add(deleteAllMenu);
@@ -121,7 +124,7 @@ public class GUI {
         ***************************************************************************/
         JPanel documentPanel = new JPanel(new BorderLayout());
 
-        JList<String> fileList = new JList<String>(documentModel);
+        fileList = new JList<String>(documentModel);
         fileList.setCellRenderer(new FileRenderer(true));
         fileList.setLayoutOrientation(javax.swing.JList.VERTICAL);
 
@@ -226,7 +229,7 @@ public class GUI {
         ***************************************************************************/
         JPanel partPanel = new JPanel(new BorderLayout());
 
-        JList<DP> partList = new JList<DP>(partModel);
+        partList = new JList<DP>(partModel);
         partList.setCellRenderer(new PartRenderer());
         partList.setLayoutOrientation(javax.swing.JList.VERTICAL);
 
@@ -451,13 +454,13 @@ public class GUI {
             JLabel l = (JLabel)c;
             String fileName = (String)value;
 
-            l.setText(fileName);
-            
             ImageIcon pdfIcon = new ImageIcon("./resources/PDFIcon.png");
             Image image = pdfIcon.getImage(); // transform it 
-            Image scaledImage = image.getScaledInstance(20, 24,  java.awt.Image.SCALE_SMOOTH); // scale it the smooth way  
+            Image scaledImage = image.getScaledInstance(50, 50,  java.awt.Image.SCALE_REPLICATE); // 20, 24
             pdfIcon = new ImageIcon(scaledImage);  // transform it back
             l.setIcon(pdfIcon);
+
+            l.setText(fileName);
 
             if (pad) {
                 l.setBorder(padBorder);

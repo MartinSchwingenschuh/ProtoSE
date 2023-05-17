@@ -38,7 +38,9 @@ public class OptionsManager{
         CLIENT_D_PATH,
         CLIENT_TMP_DIR,
         CLIENT_KEYS_DIR,
+        CLIENT_PATHGEN_FLHIDING,
         CLIENT_PATHGEN_HIDEDISTANCE,
+        CLIENT_PATHGEN_MODE,
         CLIENT_SCRAMBLEBUFFER_SIZE,
         CLIENT_SCRAMBLEBUFFER_NULLFACTOR,
         CLIENT_QUERYCASH_SIZE
@@ -158,10 +160,22 @@ public class OptionsManager{
         staticDefaultValueMap.put(OPTIONIDENT.CLIENT_KEYS_DIR, "./keys");
 
         staticPatternMap.put(
+            OPTIONIDENT.CLIENT_PATHGEN_FLHIDING, Pattern.compile("CLIENT_PATHGEN_FLHIDING .+",
+            Pattern.CASE_INSENSITIVE)
+        );
+        staticDefaultValueMap.put(OPTIONIDENT.CLIENT_PATHGEN_FLHIDING, "true");
+
+        staticPatternMap.put(
             OPTIONIDENT.CLIENT_PATHGEN_HIDEDISTANCE, Pattern.compile("CLIENT_PATHGEN_HIDEDISTANCE \\d+",
             Pattern.CASE_INSENSITIVE)
         );
         staticDefaultValueMap.put(OPTIONIDENT.CLIENT_PATHGEN_HIDEDISTANCE, "10");
+
+        staticPatternMap.put(
+            OPTIONIDENT.CLIENT_PATHGEN_MODE, Pattern.compile("CLIENT_PATHGEN_MODE .+",
+            Pattern.CASE_INSENSITIVE)
+        );
+        staticDefaultValueMap.put(OPTIONIDENT.CLIENT_PATHGEN_MODE, "RANDACC");
 
         staticPatternMap.put(
             OPTIONIDENT.CLIENT_SCRAMBLEBUFFER_SIZE, Pattern.compile("CLIENT_SCRAMBLEBUFFER_SIZE \\d+",

@@ -1,22 +1,27 @@
 package com.protose;
 
+import java.security.SecureRandom;
 import java.util.List;
 
 import com.protose.shared.Crypto;
+import com.protose.shared.OptionsManager;
 import com.protose.shared.QueryPath;
 import com.protose.shared.StorePath;
+import com.protose.shared.OptionsManager.OPTIONIDENT;
 import com.protose.shared.StorePath.PathNode;
 
 public class PathGenerator {
 
     private Crypto crypto;
-    private int hideDistance;
+    // private int hideDistance;
     private int serverWidth;
+    private OptionsManager options;
 
-    public PathGenerator(Crypto crypto, int hideDistance, int serverWidth){
+    public PathGenerator(Crypto crypto, OptionsManager options, int serverWidth){
         this.crypto = crypto;
-        this.hideDistance = hideDistance;
+        // this.hideDistance = hideDistance;
         this.serverWidth = serverWidth;
+        this.options = options;
     }
 
 
@@ -38,72 +43,53 @@ public class PathGenerator {
         crypto.shuffleList(p);
 
         //hide first and last node by adding fake nodes
-        PathNode n0 = storePath.new PathNode();
-        n0.serverPos = crypto.getRandomInt(serverHead);//TODO: implement custom distance
-        n0.isInternal = false;
-        p.add(0, n0);
+        int configuredHideDistance = Integer.parseInt(options.getOption(OPTIONIDENT.CLIENT_PATHGEN_HIDEDISTANCE));
 
-        PathNode nn = storePath.new PathNode();
-        nn.serverPos = crypto.getRandomInt(serverHead);//TODO: implement custom distance
-        nn.isInternal = false;
-        p.add(p.size(), nn);
+        //hide first and last node only if configured in options
+        if(options.getOption(OPTIONIDENT.CLIENT_PATHGEN_FLHIDING).equals("true")){
+            PathNode n0 = storePath.new PathNode();
+            int d0 = (serverHead >= configuredHideDistance) ? (configuredHideDistance): serverHead;
+            n0.serverPos = crypto.getRandomInt(d0);
+            n0.isInternal = false;
+            p.add(0, n0);
+    
+            PathNode nn = storePath.new PathNode();
+            int d1 = (serverHead >= configuredHideDistance) ? (configuredHideDistance): serverHead;
+            nn.serverPos = crypto.getRandomInt(d1);
+            nn.isInternal = false;
+            p.add(p.size(), nn);
+        }
 
         // //expand the path between the nodes
         qp.startPos = p.get(0).serverPos;
 
-        //TODO: this is just the access pattern which needs to be 
-        //hidden
-        for (PathNode pathNode : p) {
-            //only process external nodes
-            //and only if distinct
-            if(!pathNode.isInternal && !qp.positions.contains(pathNode.serverPos)){ 
-                qp.positions.add(pathNode.serverPos); 
+        //mode selection
+        if(options.getOption(OPTIONIDENT.CLIENT_PATHGEN_MODE).equals("PATHACC")){
+            //path access mode
+            //TODO: impl this?
+        }else if(options.getOption(OPTIONIDENT.CLIENT_PATHGEN_MODE).equals("RANDACC")){
+            //random access mode
+
+            //add the required nodes
+            for (PathNode pathNode : p) {
+                //only process external nodes
+                //and only if distinct
+                if(!pathNode.isInternal && !qp.positions.contains(pathNode.serverPos)){ 
+                    qp.positions.add(pathNode.serverPos); 
+                }
+            }
+
+            //add additional random nodes
+            int numberofRounds = 10;
+            SecureRandom rand = new SecureRandom();
+            for (int i = 0; i < numberofRounds; i++) {
+                int randNumber = rand.nextInt(serverHead);
+                if(!qp.positions.contains(randNumber)){
+                    qp.positions.add(randNumber);
+                }
             }
         }
 
-        //TODO: think of a proper algorithm for the expansion
-        // for (int i = 0; i < p.size()-1; i++) {
-        //     PathNode p0 = p.get(i);
-        //     PathNode p1 = p.get(i+1);
-
-        //     int d0 = p0.serverPos / serverWidth;
-        //     int w0 = p0.serverPos % serverWidth;
-
-        //     int d1 = p1.serverPos / serverWidth;
-        //     int w1 = p1.serverPos % serverWidth;
-
-        //     //left right
-        //     int deltaHorizontal = Math.abs(w1-w0);
-        //     if(d1-d0 < 0){
-        //         //left
-        //         for (int j = 0; j < deltaHorizontal; j++) {
-        //             qp.actions.add(PathAction.LEFT);
-        //         }
-        //     }else{
-        //         //right
-        //         for (int j = 0; j < deltaHorizontal; j++) {
-        //             qp.actions.add(PathAction.RIGHT);
-        //         }
-        //     }            
-
-        //     //up down
-        //     int deltaVertical = Math.abs(d1-d0);
-        //     if(d1-d0 < 0){
-        //         //up
-        //         for (int j = 0; j < deltaVertical; j++) {
-        //             qp.actions.add(PathAction.UP);
-        //         }
-        //     }else{
-        //         //down
-        //         for (int j = 0; j < deltaVertical; j++) {
-        //             qp.actions.add(PathAction.DOWN);
-        //         }
-        //     }     
-
-        // }
-
         return qp;
     }
-
-
 }
