@@ -769,7 +769,7 @@ public class Client {
             
             //randomize array
             crypto.shuffleArray(words);
-
+ 
             for (int i = 0; i < words.length; i+=2) {
                 tmpQueryCash.put(words[i], queryCash.get(words[i+1]));
                 tmpQueryCash.put(words[i+1], queryCash.get(words[i]));

@@ -51,13 +51,21 @@ public class PathGenerator {
             int d0 = (serverHead >= configuredHideDistance) ? (configuredHideDistance): serverHead;
             n0.serverPos = crypto.getRandomInt(d0);
             n0.isInternal = false;
-            p.add(0, n0);
+            boolean found = p.stream().anyMatch(elem -> {
+                if(elem.serverPos == n0.serverPos){ return true;}
+                return false;
+            });
+            if(!found){ p.add(0, n0); }
     
             PathNode nn = storePath.new PathNode();
             int d1 = (serverHead >= configuredHideDistance) ? (configuredHideDistance): serverHead;
             nn.serverPos = crypto.getRandomInt(d1);
             nn.isInternal = false;
-            p.add(p.size(), nn);
+            found = p.stream().anyMatch(elem -> {
+                if(elem.serverPos == n0.serverPos){ return true;}
+                return false;
+            });
+            if(!found){ p.add(p.size(), nn); }
         }
 
         // //expand the path between the nodes

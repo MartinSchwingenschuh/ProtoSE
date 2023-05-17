@@ -101,6 +101,7 @@ public class GUI {
             public void actionPerformed(ActionEvent e) {
                 client.purge();
                 documentModel.clear();
+                controller.closeDocument();
             }
         });
         fileMenu.add(deleteAllMenu);
