@@ -10,6 +10,7 @@ import java.util.List;
 import javax.swing.*;
 import javax.swing.border.Border;
 import javax.swing.border.EmptyBorder;
+import javax.swing.filechooser.FileSystemView;
 
 import org.icepdf.ri.common.SwingController;
 import org.icepdf.ri.common.SwingViewBuilder;
@@ -456,11 +457,8 @@ public class GUI {
             String fileName = (String)value;
 
             ImageIcon pdfIcon = new ImageIcon("./resources/PDFIcon.png");
-            Image image = pdfIcon.getImage(); // transform it 
-            Image scaledImage = image.getScaledInstance(50, 50,  java.awt.Image.SCALE_REPLICATE); // 20, 24
-            pdfIcon = new ImageIcon(scaledImage);  // transform it back
-            l.setIcon(pdfIcon);
 
+            l.setIcon(FileSystemView.getFileSystemView().getSystemIcon(new File("./resources/imageIcon.pdf")));
             l.setText(fileName);
 
             if (pad) {

@@ -602,8 +602,14 @@ public class Client {
             
         });
 
+        //filter for duplicates
+        List<DP> filteredList = new LinkedList<DP>();
+        for (DP dp : DPs) {
+            if(!filteredList.contains(dp)){ filteredList.add(dp); }
+        }
+
         //concat them into one document
-        return documentSplitter.combineDocument(DPs, docname);
+        return documentSplitter.combineDocument(filteredList, docname);
     }    
 
     /**
