@@ -23,3 +23,4 @@ server/Server/srv/*
 !server/Server/srv/.gitkeep
 
 !server/Server/etc/.gitkeep
+/bin/

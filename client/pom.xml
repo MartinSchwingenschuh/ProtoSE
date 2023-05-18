@@ -49,7 +49,18 @@
         <artifactId>guava</artifactId>
         <version>31.0.1-jre</version>
     </dependency>
-
+    <!-- <dependency>
+      <groupId>com.sample</groupId>
+      <artifactId>sample</artifactId>
+      <version>1.0</version>
+      <scope>system</scope>
+      <systemPath>${project.basedir}/lib/icepdf-core-7.0.1.jar</systemPath>
+    </dependency> -->
+    <dependency>
+      <groupId>com.github.pcorless.icepdf</groupId>
+      <artifactId>icepdf-viewer</artifactId>
+      <version>7.0.1</version>
+    </dependency>
   </dependencies>
 
   <build>
